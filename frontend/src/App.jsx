@@ -9,14 +9,14 @@ function App() {
 
   const chatEndRef = useRef(null);
 
-useEffect(() => {
-  if (chatEndRef.current) {
-    chatEndRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-    });
-  }
-}, [messages, loading]);
+  useEffect(() => {
+    if (chatEndRef.current) {
+      chatEndRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [messages, loading]);
 
   const sendMessage = async () => {
     if (!message.trim() || loading) return;
@@ -40,15 +40,16 @@ useEffect(() => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: userText,
-        }),
-      });
+        "https://chat-boat-production-776f.up.railway.app/chat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: userText,
+          }),
+        });
 
       if (!response.ok) {
         throw new Error("Server error");
@@ -191,9 +192,8 @@ useEffect(() => {
 
             <div
               key={index}
-              className={`message-row ${
-                msg.role === "user" ? "user-row" : "bot-row"
-              }`}
+              className={`message-row ${msg.role === "user" ? "user-row" : "bot-row"
+                }`}
             >
 
               {msg.role === "model" && (
@@ -203,11 +203,10 @@ useEffect(() => {
               )}
 
               <div
-                className={`message ${
-                  msg.role === "user"
+                className={`message ${msg.role === "user"
                     ? "user-message"
                     : "bot-message"
-                }`}
+                  }`}
               >
 
                 <p>{msg.text}</p>
