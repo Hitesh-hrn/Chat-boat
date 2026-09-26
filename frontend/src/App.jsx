@@ -40,7 +40,7 @@ useEffect(() => {
 
     try {
       const response = await fetch(
-        "https://genaiproject-production-55b2.up.railway.app/chat", {
+        "http://localhost:5000/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
